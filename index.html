@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <picture>
+        <source srcset="mypic.jpg" type="image/jpeg">
+        <img src="mypic.jpg" alt="Profile Picture" style="width:200px;">
+    </picture>
+    <h1>Giridharan P</h1>
+    <p>MTech CSE @ IIIT-H-27</p>
+    <h2>About Me</h2>
+    <p>I am a first-year MTech student at IIIT-Hyderabad, specializing in Computer Science and Engineering.</p>
+    <p> My interests include web development, machine learning. I enjoy working on projects and learning new technologies.</p>
+    <h2>Education</h2>
+    <ul>
+        <li>10th - Bharatiya Vidya Bhavan School</li>
+        <li>12th - Bharathi Matriculation School</li>
+        <li>B.Tech Information Technology in PSGCT</li>
+        <li>MTech CSE in IIIT-Hyderabad</li>
+    </ul>
+    <h2>Skills</h2>
+    <ul>
+        <li>Programming Languages: Python, Java, C++</li>
+        <li>Web Development: HTML, CSS, JavaScript</li>
+        <li>Machine Learning: TensorFlow, Scikit-learn</li>
+                <script>
+/**
+ * Q6: Tracks user activity (page view and clicks) and logs them to the console.
+ * Output format: Timestamp, type_of_event (click/view), event_object (tag/class/ID).
+ */
+function trackUserActivity() {
+    // Helper to format the output log
+    const logActivity = (eventType, target) => {
+        const timestamp = new Date().toISOString();
+        
+        // Determine the most specific identifier for the event object
+        let eventObject = target.tagName;
+        if (target.id) {
+            eventObject += ` (#${target.id})`;
+        }
+        if (target.className && typeof target.className === 'string') {
+            eventObject += ` (.${target.className.split(' ').filter(c => c).join('.')})`;
+        }
+        
+        // Clean up the string to remove extraneous spaces/dots for readability
+        eventObject = eventObject.replace(/\s+/g, ' ').trim().replace(/\.+$/, '');
+        
+        console.log(`[Q6 LOG] ${timestamp}, ${eventType}, ${eventObject}`);
+    };
+
+    // 1. Capture Page View Event
+    const pageViewTarget = document.querySelector('body') || document;
+    logActivity('view', pageViewTarget);
+
+    // 2. Capture All Click Events
+    document.addEventListener('click', (event) => {
+        if (event.target) {
+            logActivity('click', event.target);
+        }
+    });
+
+    console.log("Q6: User activity tracking started. Click events and page view will be logged above.");
+}
+
+// Automatically start tracking when the document structure is loaded
+document.addEventListener('DOMContentLoaded', trackUserActivity);
+</script>
+
+</body>
+</html>
